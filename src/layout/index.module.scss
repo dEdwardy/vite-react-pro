@@ -1,0 +1,23 @@
+.header{
+  display: flex;
+  padding:0 !important;
+  // justify-content: space-between;
+  align-items: center;
+  .logoWrapper{
+    width:200px;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .logo{
+      display: inline-block;
+      width:40px;
+    }
+  }
+  .menu{
+    flex:1;
+  }
+}
+.main{
+  overflow-y: scroll;
+}

@@ -1,39 +1,49 @@
-import React from 'react'
-import { Router, Route, Switch } from 'dva/router'
-import Layout from '@/layout'
-import dynamic from 'dva/dynamic'
+import React from "react";
+import { Router, Route, Switch, Redirect } from "dva/router";
+import Layout from "@/layout";
+import dynamic from "dva/dynamic";
+// import { Redirect } from 'react-router'
 
-const menus = [
+const routes = [
   {
-    path: '/',
-    name: '首页',
-    component: () => import('./pages/Home')
-  }
-]
-function RouterConfig ({ history, app }) {
+    path: "/",
+    exact: true,
+    name: "首页",
+    requireAuth: false,
+    component: () => import("@/pages/Home"),
+  },
+  {
+    path: "/404",
+    name: "not-found",
+    requireAuth: false,
+    component: () => import("@/pages/404"),
+  },
+];
+function RouterConfig({ history, app }) {
   return (
     <Layout>
       <Router history={history}>
         <Switch>
-          {
-            menus.map(({ path, ...others }, index) => {
-              return (
-                <Route
-                  key={index}
-                  path={path}
-                  component={dynamic({
-                    app,
-                    ...others
-                  })}
-                />
-              )
-            })
-          }
+          {routes.map(({ path, requireAuth, exact, ...others }, index) => {
+            if (requireAuth) {
+              return <Redirect to={{ pathname: "/404" }} />;
+            }
+            return (
+              <Route
+                exact={exact}
+                key={index}
+                path={path}
+                component={dynamic({
+                  app,
+                  ...others,
+                })}
+              />
+            );
+          })}
         </Switch>
       </Router>
     </Layout>
-
-  )
+  );
 }
 
-export default RouterConfig
+export default RouterConfig;
