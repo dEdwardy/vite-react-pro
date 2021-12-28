@@ -1,6 +1,8 @@
 export default { 
   namespace:'common',
-  state:[],
+  state:{
+    uinfo:{}
+  },
   reducers:{
 
   },
