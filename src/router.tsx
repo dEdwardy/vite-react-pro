@@ -12,8 +12,9 @@ const menus = [
 ]
 function RouterConfig ({ history, app }) {
   return (
-    <Layout>
       <Router history={history}>
+       
+        <Layout>
         <Switch>
           {
             menus.map(({ path, ...others }, index) => {
@@ -30,8 +31,9 @@ function RouterConfig ({ history, app }) {
             })
           }
         </Switch>
+        </Layout>
       </Router>
-    </Layout>
+    <
 
   )
 }
